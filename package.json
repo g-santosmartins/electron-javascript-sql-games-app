@@ -1,0 +1,26 @@
+{
+  "name": "locadora-piton",
+  "productName": "LocadoraPiton",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron"
+  ],
+  "author": "GitHub",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.0.7",
+    "react": "^18.2.0",
+    "react-datepicker": "4.8.0",
+    "react-dom": "^18.2.0",
+    "react-toastify": "9.0.5"
+  },
+  "dependencies": {
+    "python-shell": "^1.0.7"
+  }
+}
