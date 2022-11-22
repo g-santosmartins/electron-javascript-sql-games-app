@@ -1,42 +1,77 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./styles/styles.css">
   <link rel="icon" href="_images/logo.png">
   <title>Locadora - os melhores preços</title>
-
+  <script src="./_linkers/productController.js"></script>
 </head>
 
 <body>
   <header>
-  <div class="dsmeta-logo-container">
-    <img src="./_images/logo.png" alt="logo cobra pitón">
-    <h1>Píton Games </h1>
-    <h3>Elevando seu nível de jogo </h3>
-  </div>
+    <div class="dsmeta-logo-container">
+      <img src="./_images/logo.png" alt="logo cobra pitón">
+      <h1>Píton Games </h1>
+      <h3>Elevando seu nível de produto </h3>
+    </div>
   </header>
 
   <section id="sales">
     <div class="locadora-container">
       <div class="Toastify"></div>
       <div class="locadora-card">
-        <h2 class="locadora-sales-title">Gestão de itens cadastrados</h2>
+        <h2 class="locadora-sales-title">Gestão de produtos</h2>
         <div>
-          <div class="locadora-form-control-container"><label>Nome</label><input placeholder="Digite o nome do jogo">
+          <div class="locadora-form-control-container">
+            <label>Tipo de operação</label>
+            <select  id="input-type">
+              <option value="1">Cadastrar</option>
+              <option value="2">Buscar</option>
+              <option value="3">Atualizar</option>
+              <option value="4">Deletar</option>
+            </select>
           </div>
-          <div class="locadora-form-control-container"><label>Categoria</label><select>
-              <option value="">Aventura</option>
-              <option value="">Ação</option>
-              <option value="">FPS</option>
-              <option value="">Terror</option>
-            </select></div>
-          <div class="locadora-form-control-container"><label>Preço R$</label><input placeholder="Digite o preço"></div>
-          <div class="locadora-form-control-container "><label>Descrição</label><input placeholder="Digite a descrição">
+          <div class="locadora-form-control-container">
+            <label>Nome</label>
+            <input id="input-name" placeholder="Digite o nome do produto">
+          </div>
+          <div class="locadora-form-control-container">
+            <label>Categoria</label>
+            <select  id="input-category">
+              <option value="aventura">Aventura</option>
+              <option value="rpg"> RPG</option>
+              <option value="terror">Terror</option>
+              <option value="plataforma">Plataforma</option>
+            </select>
+          </div>
+          <div class="locadora-form-control-container">
+            <label>Descrição</label>
+            <input id="input-description" placeholder="Digite a descrição do produto">
+          </div>
+
+          <div class="locadora-form-control-container">
+            <label>Quantidade</label>
+            <input id="input-quantity" placeholder="Digite a quantidade do produto">
+          </div>
+          <div class="locadora-form-control-container">
+            <label>Produtora | Desenvolvedora</label>
+            <input id="input-maker" placeholder="Digite o nome da produtora">
+          </div>
+          <div class="locadora-form-control-container">
+            <label>Preço R$</label>
+            <input id="input-price" placeholder="Digite o preço">
+          </div>
+          <div class="locadora-form-control-container ">
+            <label>Imagem do produto (URL)</label>
+            <input id="input-image-url" placeholder="Digite a link da imagem">
           </div>
           <div class="locadora-buttons-container ">
-            <div class="locadora-form-control-container"><button class="locadora-card-button-success">Confirmar</button>
+            <div class="locadora-form-control-container">
+              <button onclick="handleDefineAction()"
+                class="locadora-card-button-success">Confirmar</button>
             </div>
-            <div class="locadora-form-control-container"><button class="locadora-card-button-danger ">Cancelar</button>
+            <div class="locadora-form-control-container">
+              <button class="locadora-card-button-danger ">Cancelar</button>
             </div>
           </div>
         </div>
@@ -45,10 +80,11 @@
             <thead>
               <tr>
                 <th class="show992">ID</th>
-                <th class="show576">Data cadastro</th>
-                <th>Vendedor</th>
-                <th class="show992">Visitas</th>
-                <th class="show992">Vendas</th>
+                <th class="show576">Nome</th>
+                <th class="show576">Descrição</th>
+                <th class="show992">Produtora</th>
+                <th class="show992">Preço</th>
+                <th class="show992">Imagem produto</th>
                 <th>Total</th>
                 <th>Notificar</th>
               </tr>
