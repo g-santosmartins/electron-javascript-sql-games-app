@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1,'../modelo')
+sys.path.insert(1,'./modelo')
 from Produto import Produto
 from ProdutoDao import ProdutoDao
 
@@ -50,7 +50,7 @@ class ProdutoController:
 
 teste = ProdutoController()
 
-# print(teste.consultar(1))
+print(teste.consultar(1))
 # print(teste.cadastrar('jogoteste','descricaoteste',10.00,2,'ateste','pteste','imgurl'))
 # print(teste.consultar(4))
 # print(teste.atualizar(4,'jogotesteAlterado','descricaoteste',10.00,2,'ateste','pteste','imgurl'))

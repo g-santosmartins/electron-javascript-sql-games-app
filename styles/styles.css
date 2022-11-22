@@ -97,8 +97,14 @@ header {
   border: 1px solid #e3e3e3;
 }
 
+.locadora-form-control-container option {
+  font-size: 16px;
+}
+
+
 .locadora-form-control-container label {
-  font-size: 1.2rem;
+  font-size: 16px;
+  font-weight: bolder;
 }
 
 .locadora-form-control-description-area {
