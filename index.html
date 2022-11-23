@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="./styles/styles.css">
   <link rel="icon" href="_images/logo.png">
   <title>Píton Games - Elevando seu nível de jogo</title>
-  <script src="./_adapaters/productController.js"></script>
+  <script src="./_adapaters/productControllerAdapter.js"></script>
 </head>
 
 <body>
@@ -18,13 +18,31 @@
 
   <section id="sales">
     <div class="locadora-container">
+      <div class="search-container-section">
+        <div class="locadora-form-control-container">
+          <label>Buscar produtos</label>
+          <input required id="input-search" placeholder="Digite a ID do produto para pesquisar">
+        </div>
+        <div class="locadora-form-control-container">
+          <button onclick="cleanAllDataFields()" style="width: 100%;" class="locadora-card-button-success ">Buscar</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sales">
+    <!-- Search Bar -->
+
+    <!-- Form -->
+    <div class="locadora-container">
       <div class="Toastify"></div>
       <div class="locadora-card">
         <h2 class="locadora-sales-title">Gestão de produtos</h2>
-        <div>
+        <form onsubmit="handleDefineAction();return false;">
           <div class="locadora-form-control-container">
             <label>Tipo de operação</label>
-            <select  id="input-type">
+            <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-type">
               <option value="1">Cadastrar</option>
               <option value="2">Buscar</option>
               <option value="3">Atualizar</option>
@@ -33,11 +51,13 @@
           </div>
           <div class="locadora-form-control-container">
             <label>Nome</label>
-            <input id="input-name" placeholder="Digite o nome do produto">
+            <input required  oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-name" placeholder="Digite o nome do produto">
           </div>
           <div class="locadora-form-control-container">
             <label>Categoria</label>
-            <select  id="input-category">
+            <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-category">
               <option value="aventura">Aventura</option>
               <option value="rpg"> RPG</option>
               <option value="terror">Terror</option>
@@ -46,35 +66,41 @@
           </div>
           <div class="locadora-form-control-container">
             <label>Descrição</label>
-            <input id="input-description" placeholder="Digite a descrição do produto">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-description" placeholder="Digite a descrição do produto">
           </div>
 
           <div class="locadora-form-control-container">
             <label>Quantidade</label>
-            <input id="input-quantity" placeholder="Digite a quantidade do produto">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')"  id="input-quantity" placeholder="Digite a quantidade do produto">
           </div>
           <div class="locadora-form-control-container">
             <label>Produtora | Desenvolvedora</label>
-            <input id="input-maker" placeholder="Digite o nome da produtora">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-maker" placeholder="Digite o nome da produtora">
           </div>
           <div class="locadora-form-control-container">
             <label>Preço R$</label>
-            <input id="input-price" placeholder="Digite o preço">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-price" placeholder="Digite o preço">
           </div>
           <div class="locadora-form-control-container ">
             <label>Imagem do produto (URL)</label>
-            <input id="input-image-url" placeholder="https://exemplolink.com.br/imagem...">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-image-url" placeholder="https://exemplolink.com.br/imagem...">
           </div>
           <div class="locadora-buttons-container ">
             <div class="locadora-form-control-container">
-              <button onclick="handleDefineAction()"
-                class="locadora-card-button-success">Confirmar</button>
+              <button type="submit" class="locadora-card-button-success">
+                Confirmar
+              </button>
             </div>
             <div class="locadora-form-control-container">
               <button onclick="cleanAllDataFields()" class="locadora-card-button-danger ">Cancelar</button>
             </div>
           </div>
-        </div>
+        </form>
         <div>
           <table class="locadora-sales-table">
             <thead>

@@ -87,12 +87,16 @@ header {
   width: auto;
   font-size: 2rem;
 }
+.locadora-search-container-section {
+  display: flex;
+  justify-content: space-between;
+}
 
 .locadora-form-control-container input, select {
   width: 100%;
   height: 50px;
   border-radius: 5px;
-  background: #ffffff 0% 0% no-repeat padding-box;
+  background: #e3e3e3 0% 0% no-repeat padding-box;
   box-shadow: 0px 3px 6px #00000029;
   border: 1px solid #e3e3e3;
 }
@@ -146,7 +150,7 @@ header {
   border: none;
   height: 50px;
   color: #f1f1f1;
-  font-size: 1.5rem;
+  font-size: 18px;
   border-radius: 5px;
   font-weight: bold;
   min-width: auto;
@@ -161,7 +165,7 @@ header {
   background-color: #be2626;
   height: 50px;
   color: #f1f1f1;
-  font-size: 1.5rem;
+  font-size: 18px;
   border-radius: 5px;
   font-weight: bold;
   min-width: auto;
