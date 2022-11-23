@@ -20,11 +20,22 @@
     <div class="locadora-container">
       <div class="search-container-section">
         <div class="locadora-form-control-container">
-          <label>Buscar produtos</label>
+          <label>Tipo de operação</label>
+          <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+            oninput="setCustomValidity('')" id="input-type">
+            <option value="1">Buscar</option>
+            <option value="2">Cadastrar</option>
+            <option value="3">Atualizar</option>
+            <option value="4">Deletar</option>
+          </select>
+        </div>
+        <div class="locadora-form-control-container">
+          <label>Identificador do produto</label>
           <input required id="input-search" placeholder="Digite a ID do produto para pesquisar">
         </div>
         <div class="locadora-form-control-container">
-          <button onclick="cleanAllDataFields()" style="width: 100%;" class="locadora-card-button-success ">Buscar</button>
+          <button onclick="handleSearchItem()" style="width: 100%;"
+            class="locadora-card-button-success ">Realizar busca</button>
         </div>
       </div>
     </div>
@@ -40,24 +51,20 @@
         <h2 class="locadora-sales-title">Gestão de produtos</h2>
         <form onsubmit="handleDefineAction();return false;">
           <div class="locadora-form-control-container">
-            <label>Tipo de operação</label>
-            <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-type">
-              <option value="1">Cadastrar</option>
-              <option value="2">Buscar</option>
-              <option value="3">Atualizar</option>
-              <option value="4">Deletar</option>
-            </select>
+            <div class="id-form-container">
+              <label>ID produto: </label>
+              <span disabled id="span-id" placeholder="Número indentificador">...</span>
+            </div>
           </div>
           <div class="locadora-form-control-container">
             <label>Nome</label>
-            <input required  oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-name" placeholder="Digite o nome do produto">
+            <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
+              oninput="setCustomValidity('')" id="input-name" placeholder="Digite o nome do produto">
           </div>
           <div class="locadora-form-control-container">
             <label>Categoria</label>
             <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-category">
+              oninput="setCustomValidity('')" id="input-category">
               <option value="aventura">Aventura</option>
               <option value="rpg"> RPG</option>
               <option value="terror">Terror</option>
@@ -67,28 +74,28 @@
           <div class="locadora-form-control-container">
             <label>Descrição</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-description" placeholder="Digite a descrição do produto">
+              oninput="setCustomValidity('')" id="input-description" placeholder="Digite a descrição do produto">
           </div>
 
           <div class="locadora-form-control-container">
             <label>Quantidade</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')"  id="input-quantity" placeholder="Digite a quantidade do produto">
+              oninput="setCustomValidity('')" id="input-quantity" placeholder="Digite a quantidade do produto">
           </div>
           <div class="locadora-form-control-container">
             <label>Produtora | Desenvolvedora</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-maker" placeholder="Digite o nome da produtora">
+              oninput="setCustomValidity('')" id="input-maker" placeholder="Digite o nome da produtora">
           </div>
           <div class="locadora-form-control-container">
             <label>Preço R$</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-price" placeholder="Digite o preço">
+              oninput="setCustomValidity('')" id="input-price" placeholder="Digite o preço">
           </div>
           <div class="locadora-form-control-container ">
             <label>Imagem do produto (URL)</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-image-url" placeholder="https://exemplolink.com.br/imagem...">
+              oninput="setCustomValidity('')" id="input-image-url" placeholder="https://exemplolink.com.br/imagem...">
           </div>
           <div class="locadora-buttons-container ">
             <div class="locadora-form-control-container">

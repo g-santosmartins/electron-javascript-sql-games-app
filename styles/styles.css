@@ -158,6 +158,7 @@ header {
 }
 .locadora-card-button-success:hover{
   background-color: #4abe4a;
+  transition: 0.5s;
 }
 
 .locadora-card-button-danger {
@@ -172,11 +173,15 @@ header {
   width: 400px
 }
 
-.locadora-card-button-danger:hover{
-
-  background-color: #df4141;
-
+.id-form-container span, label{
+  font-size: 20px;
 }
+
+.locadora-card-button-danger:hover{
+  transition: 0.5s;
+  background-color: #df4141;
+}
+
 .locadora-buttons-container {
   display: flex;
   justify-content: space-between;
