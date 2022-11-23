@@ -3,6 +3,16 @@ sys.path.insert(1,'./modelo')
 from Produto import Produto
 from ProdutoDao import ProdutoDao
 
+# catching all the props by sys params
+opType       = sys.argv[1]
+name         = sys.argv[2]
+category     = sys.argv[3]
+description  = sys.argv[4]
+quantity     = int(sys.argv[5])
+producer     = sys.argv[6]
+price        = float(sys.argv[7])
+image_url    = sys.argv[8]
+
 class ProdutoController:
     def __init__(self):
         self.prod=None
@@ -48,11 +58,18 @@ class ProdutoController:
             return self.prodDao.delete(self.prod)
 
 
-teste = ProdutoController()
+controllerInstance = ProdutoController()
 
-print(teste.consultar(1))
-# print(teste.cadastrar('jogoteste','descricaoteste',10.00,2,'ateste','pteste','imgurl'))
-# print(teste.consultar(4))
-# print(teste.atualizar(4,'jogotesteAlterado','descricaoteste',10.00,2,'ateste','pteste','imgurl'))
+if(opType == "1"):
+    controllerInstance.cadastrar(name,description,price,quantity,category, producer,image_url)
+if(opType == "2"):
+    controllerInstance.atualizar(name,description,price,quantity,'ateste','pteste',image_url)
+if(opType == "3"):
+    controllerInstance.cadastrar(name,'descricaoteste',10.00,2,'ateste','pteste','imgurl')
+if(opType == "4"):
+    controllerInstance.atualizar(4,'jogotesteAlterado','descricaoteste',10.00,2,'ateste','pteste','imgurl')
+
+# print(teste.consultar(1))
+# print(teste.consultar(4))'
 # print(teste.consultar(4))
 # print(teste.excluir(4))

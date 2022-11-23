@@ -2,13 +2,14 @@ let { PythonShell } = require("python-shell")
 let path = require("path")
 
 // Defing what action I would take
-function handleDefineAction(inputName) {
+function handleDefineAction() {
   let inputType = document.getElementById("input-type").value
   alert(inputType)
   if (inputType == "1") { createItemResourse() }
   if (inputType == "2") { listItemResource() }
   if (inputType == "3") { updateItemResourse() }
   if (inputType == "4") { deleteItemResourse() }
+  return false
 }
 
 function handleGetInputValue() {
@@ -25,12 +26,12 @@ function handleGetInputValue() {
     inputName,
     inputCategory,
     inputDescription,
-    inputDescription,
     inputQuantity,
     inputProducer,
     inputPrice,
     inputImageUrl
   ]
+
 }
 
 function createItemResourse() {
@@ -41,19 +42,16 @@ function createItemResourse() {
     scriptPath: path.join(__dirname, './_engine/resources/'),
     args: inputArrayResult
   }
+  try {
+    new PythonShell('ProdutoController.py', options, function (err, results) {
+      if(err) alert("Erro ao tentar criar item, tente novamente")
+      alert('Item criado com sucesso!')
+    });
 
-  let pythonScriptRunner = new PythonShell('ProdutoController.py', options);
+  }catch(err) {
+    console.log(err)
+  }
   
-  pythonScriptRunner.run('my_script.py', options, function (err, results) {
-    if (err) throw err;
-    // results is an array consisting of messages collected during execution
-    console.log('results: %j', results);
-  });
-  alert('Entrando na parte de criação de item ')
-
-  // pythonScriptRunner.on('message', function (message) {
-  //   swal('Consegui ler o script');
-  // })
 }
 
 function updateItemResourse() {
@@ -122,7 +120,7 @@ function cleanAllDataFields() {
     document.getElementById("input-quantity").value = ""
     document.getElementById("input-maker").value = ""
     document.getElementById("input-price").value = ""
-    document.getElementById("input-image-url-url").value = ""
+    document.getElementById("input-image-url").value = ""
     alert("Os campos foram limpos!")
   } catch (err) {
     console.log(err)

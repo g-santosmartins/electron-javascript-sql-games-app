@@ -6,7 +6,7 @@ class ProdutoDao:
         self.conexao=''
         self.cursor=''
     def conectaDB(self):
-        self.conexao = mysql.connector.connect(host='localhost',database='rentGames',user='root',password='')
+        self.conexao = mysql.connector.connect(host='172.17.0.2',database='rentGames',user='root',password='')
         if not self.conexao.is_connected():
             return false
         self.cursor= self.conexao.cursor()

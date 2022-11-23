@@ -4,7 +4,7 @@ use rentGames;
 
 CREATE TABLE `produto` (
   `codigo` int(11) NOT NULL auto_increment primary key,
-  `nome` varchar(30),
+  `nome` varchar(300),
   `descricao` varchar(500) DEFAULT NULL,
   `preco` float DEFAULT NULL,
   `qtde` int(11) NOT NULL,
