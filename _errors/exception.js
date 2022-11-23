@@ -1,1 +1,0 @@
-const throwExceptionError = (name, id, message, massage_br, type)  => {}

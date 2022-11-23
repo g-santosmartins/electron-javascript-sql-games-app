@@ -2,16 +2,9 @@ import sys
 sys.path.insert(1,'./modelo')
 from Produto import Produto
 from ProdutoDao import ProdutoDao
-
-# catching all the props by sys params
+import json as j
+# catching the type param
 opType       = sys.argv[1]
-name         = sys.argv[2]
-category     = sys.argv[3]
-description  = sys.argv[4]
-quantity     = int(sys.argv[5])
-producer     = sys.argv[6]
-price        = float(sys.argv[7])
-image_url    = sys.argv[8]
 
 class ProdutoController:
     def __init__(self):
@@ -23,11 +16,19 @@ class ProdutoController:
     def consultar(self,codigo):
         self.prod=self.prodDao.select(codigo)
         if self.prod :
-            data=(str(self.prod.getCodigo()),self.prod.getNome(),self.prod.getDescricao(),
-                      str(self.prod.getPreco()),str(self.prod.getQtde()),self.prod.getProdutora()
-                  ,self.prod.getCategoria(),self.prod.getPreviewurl())
-            return data
-        return False
+            data={
+            'id':           self.prod.getCodigo(),
+            'name':         self.prod.getNome(),
+            'description':  self.prod.getDescricao(),
+            'price':        self.prod.getPreco(),
+            'quantity':     self.prod.getQtde(),
+            'producer':     self.prod.getProdutora(),
+            'category':     self.prod.getCategoria(),
+            'image_url':    self.prod.getPreviewurl()
+            }
+            result = j.dumps(data)
+            return result 
+        return j.dumps({'error': True, 'message': "Impossível encontrar o produto"})
     def atualizar(self,codigo,nome,descricao,preco,qtde,produtora,categoria,previewurl):
         self.prod = self.prodDao.select(codigo)
         if self.prod:
@@ -61,9 +62,17 @@ class ProdutoController:
 controllerInstance = ProdutoController()
 
 if(opType == "1"):
+    name         = sys.argv[2]
+    category     = sys.argv[3]
+    description  = sys.argv[4]
+    quantity     = int(sys.argv[5])
+    producer     = sys.argv[6]
+    price        = float(sys.argv[7])
+    image_url    = sys.argv[8]
     controllerInstance.cadastrar(name,description,price,quantity,category, producer,image_url)
 if(opType == "2"):
-    controllerInstance.atualizar(name,description,price,quantity,'ateste','pteste',image_url)
+    idSearch       = sys.argv[2]
+    print(controllerInstance.consultar(idSearch))
 if(opType == "3"):
     controllerInstance.cadastrar(name,'descricaoteste',10.00,2,'ateste','pteste','imgurl')
 if(opType == "4"):

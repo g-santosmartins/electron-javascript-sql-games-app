@@ -5,22 +5,30 @@ let path = require("path")
 function handleDefineAction() {
   let inputType = document.getElementById("input-type").value
   alert(inputType)
-  if (inputType == "1") { createItemResourse() }
-  if (inputType == "2") { listItemResource() }
-  if (inputType == "3") { updateItemResourse() }
-  if (inputType == "4") { deleteItemResourse() }
+  if (inputType == "1")  { listItemResource() }
+  if (inputType == "2")  { createItemResourse() }
+  if (inputType == "3")  { updateItemResourse() }
+  if (inputType == "4")  { deleteItemResourse() }
   return false
+}
+function handleSearchItem() {
+  let inputType = document.getElementById("input-type").value
+  if(inputType !== "1") {
+    alert("Por favor selecione buscar, para buscar um produto!")
+    return
+  }
+  listItemResource() 
 }
 
 function handleGetInputValue() {
-  let inputType = document.getElementById("input-type").value
-  let inputName = document.getElementById("input-name").value
-  let inputCategory = document.getElementById("input-category").value
-  let inputDescription = document.getElementById("input-description").value
-  let inputQuantity = document.getElementById("input-quantity").value
-  let inputProducer = document.getElementById("input-maker").value
-  let inputPrice = document.getElementById("input-price").value
-  let inputImageUrl = document.getElementById("input-image-url").value
+  let inputType         = document.getElementById("input-type").value
+  let inputName         = document.getElementById("input-name").value
+  let inputCategory     = document.getElementById("input-category").value
+  let inputDescription  = document.getElementById("input-description").value
+  let inputQuantity     = document.getElementById("input-quantity").value
+  let inputProducer     = document.getElementById("input-maker").value
+  let inputPrice        = document.getElementById("input-price").value
+  let inputImageUrl     = document.getElementById("input-image-url").value
   return  [
     inputType,
     inputName,
@@ -31,13 +39,11 @@ function handleGetInputValue() {
     inputPrice,
     inputImageUrl
   ]
-
 }
 
 function createItemResourse() {
-
   const inputArrayResult = handleGetInputValue()
-
+  
   let options = {
     scriptPath: path.join(__dirname, './_engine/resources/'),
     args: inputArrayResult
@@ -45,13 +51,12 @@ function createItemResourse() {
   try {
     new PythonShell('ProdutoController.py', options, function (err, results) {
       if(err) alert("Erro ao tentar criar item, tente novamente")
-      alert('Item criado com sucesso!')
+      if(results) alert('Item criado com sucesso!')
     });
 
   }catch(err) {
     console.log(err)
   }
-  
 }
 
 function updateItemResourse() {
@@ -59,7 +64,7 @@ function updateItemResourse() {
   const inputArrayResult = handleGetInputValue()
 
   let options = {
-    scriptPath: path.join(__dirname, '../_engine/resources/'),
+    scriptPath: path.join(__dirname, './_engine/resources/'),
     args: inputArrayResult
   }
 
@@ -73,12 +78,10 @@ function updateItemResourse() {
 
 
 function deleteItemResourse() {
-
-
   const inputArrayResult = handleGetInputValue()
 
   let options = {
-    scriptPath: path.join(__dirname, '../_engine/resources/'),
+    scriptPath: path.join(__dirname, './_engine/resources/'),
     args: inputArrayResult
   }
 
@@ -94,33 +97,60 @@ function deleteItemResourse() {
 // Getting item
 function listItemResource() {
 
- 
-  const inputArrayResult = handleGetInputValue()
+  const idItem =  document.getElementById("input-search").value
 
-  let options = {
-    scriptPath: path.join(__dirname, '../_engine/resources/'),
-    args: inputArrayResult
+  const parsedValidation = parseInt(idItem)
+  console.log(parsedValidation)
+  if(!parsedValidation) {
+    alert("Por favor digite um número, para realizar uma busca!")
+    return
   }
 
-  let pythonScriptRunner = new PythonShell('ProdutoController.py', options);
-  alert('Entrando na parte de listagem de item ')
+  let options = {
+    scriptPath: path.join(__dirname, './_engine/resources/'),
+    args: [2, idItem]
+  }  
+  try {
+    const result  = new PythonShell('ProdutoController.py', options, function (err, results) {
+      console.log()
+    });
 
+    // Retreving
+    result.on('message', (message) => {
 
-  pythonScriptRunner.on('message', function (message) {
-  })
+     const resultParsed =   JSON.parse(message)
+     if(resultParsed.error) {
+      alert(resultParsed.message)
+      return
+     }
+     alert('Produto encontrado!')
+      console.log('result', JSON.parse(message))
+      document.getElementById("span-id").innerText        = resultParsed.id
+      document.getElementById("input-name").value         = resultParsed.name
+      document.getElementById("input-category").value     = resultParsed.category
+      document.getElementById("input-description").value  = resultParsed.description
+      document.getElementById("input-quantity").value     = resultParsed.quantity
+      document.getElementById("input-maker").value        = resultParsed.producer
+      document.getElementById("input-price").value        = resultParsed.price
+      document.getElementById("input-image-url").value    = resultParsed.image_url
+    })
+
+  }catch(err) {
+    console.log(err)
+  }
 }
 
 function cleanAllDataFields() {
   // getting the UI information
   try {
-    document.getElementById("input-type").value = "1"
-    document.getElementById("input-name").value = ""
-    document.getElementById("input-category").value = "aventura"
-    document.getElementById("input-description").value = ""
-    document.getElementById("input-quantity").value = ""
-    document.getElementById("input-maker").value = ""
-    document.getElementById("input-price").value = ""
-    document.getElementById("input-image-url").value = ""
+    document.getElementById("input-type").value         = "1"
+    document.getElementById("input-name").value         = ""
+    document.getElementById("input-category").value     = "aventura"
+    document.getElementById("input-description").value  = ""
+    document.getElementById("input-quantity").value     = ""
+    document.getElementById("input-maker").value        = ""
+    document.getElementById("input-price").value        = ""
+    document.getElementById("input-image-url").value    = ""
     alert("Os campos foram limpos!")
   } catch (err) {
     console.log(err)
