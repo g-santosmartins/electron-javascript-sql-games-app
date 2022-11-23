@@ -13,11 +13,15 @@ function handleDefineAction() {
 }
 function handleSearchItem() {
   let inputType = document.getElementById("input-type").value
-  if(inputType !== "1") {
-    alert("Por favor selecione buscar, para buscar um produto!")
+  let inputId = document.getElementById("input-search").value
+  if(inputId === ""){
+    alert("Insira informação correta na barra de ID!")
     return
   }
-  listItemResource() 
+  if (inputType == "1")  { listItemResource() }
+  if (inputType == "2")  { createItemResourse() }
+  if (inputType == "3")  { updateItemResourse() }
+  if (inputType == "4")  { deleteItemResourse() }
 }
 
 function handleGetInputValue() {
@@ -29,6 +33,7 @@ function handleGetInputValue() {
   let inputProducer     = document.getElementById("input-maker").value
   let inputPrice        = document.getElementById("input-price").value
   let inputImageUrl     = document.getElementById("input-image-url").value
+
   return  [
     inputType,
     inputName,
@@ -78,20 +83,32 @@ function updateItemResourse() {
 
 
 function deleteItemResourse() {
-  const inputArrayResult = handleGetInputValue()
+  const idItem =  document.getElementById("input-search").value
 
+  const parsedValidation = parseInt(idItem)
+  // console.log(parsedValidation)
+  if(!parsedValidation) {
+    alert("Por favor digite um número, para realizar a deleção!")
+    return
+  }
   let options = {
     scriptPath: path.join(__dirname, './_engine/resources/'),
-    args: inputArrayResult
+    args: [4,idItem]
   }
 
-  let pythonScriptRunner = new PythonShell('ProdutoController.py', options);
-  alert('Entrando na parte de delecao de item ')
+  let result = new PythonShell('ProdutoController.py', options);
 
 
-  pythonScriptRunner.on('message', function (message) {
-    swal('Consegui ler o script');
-  })
+  result.on('message', (message) => {
+
+    const resultParsed =   JSON.parse(message)
+    console.log('resultado', resultParsed)
+    if(resultParsed.error) {
+      alert(resultParsed.message)
+      return
+    }
+    alert(resultParsed.message)
+   })
 }
 
 // Getting item

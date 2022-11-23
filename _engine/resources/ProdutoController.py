@@ -56,7 +56,9 @@ class ProdutoController:
     def excluir(self,codigo):
         self.prod = self.prodDao.select(codigo)
         if self.prod:
-            return self.prodDao.delete(self.prod)
+            self.prodDao.delete(self.prod)
+            return j.dumps({'success': True, 'message': "Produto deletado com sucesso"})
+        return j.dumps({'error': True, 'message': "Impossível encontrar o produto"})
 
 
 controllerInstance = ProdutoController()
@@ -76,7 +78,8 @@ if(opType == "2"):
 if(opType == "3"):
     controllerInstance.cadastrar(name,'descricaoteste',10.00,2,'ateste','pteste','imgurl')
 if(opType == "4"):
-    controllerInstance.atualizar(4,'jogotesteAlterado','descricaoteste',10.00,2,'ateste','pteste','imgurl')
+    idSearch       = sys.argv[2]
+    print(controllerInstance.excluir(idSearch))
 
 # print(teste.consultar(1))
 # print(teste.consultar(4))'
