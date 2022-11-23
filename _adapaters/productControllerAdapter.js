@@ -6,9 +6,9 @@ function handleDefineAction() {
   let inputType = document.getElementById("input-type").value
   alert(inputType)
   if (inputType == "1")  { listItemResource() }
-  if (inputType == "2")  { createItemResourse() }
-  if (inputType == "3")  { updateItemResourse() }
-  if (inputType == "4")  { deleteItemResourse() }
+  if (inputType == "2")  { createItemResource() }
+  if (inputType == "3")  { updateItemResource() }
+  if (inputType == "4")  { deleteItemResource() }
   return false
 }
 function handleSearchItem() {
@@ -19,9 +19,9 @@ function handleSearchItem() {
     return
   }
   if (inputType == "1")  { listItemResource() }
-  if (inputType == "2")  { createItemResourse() }
-  if (inputType == "3")  { updateItemResourse() }
-  if (inputType == "4")  { deleteItemResourse() }
+  if (inputType == "2")  { createItemResource() }
+  if (inputType == "3")  { updateItemResource() }
+  if (inputType == "4")  { deleteItemResource() }
 }
 
 function handleGetInputValue() {
@@ -35,7 +35,7 @@ function handleGetInputValue() {
   let inputImageUrl     = document.getElementById("input-image-url").value
 
   return  [
-    inputType,
+    1,
     inputName,
     inputCategory,
     inputDescription,
@@ -46,25 +46,26 @@ function handleGetInputValue() {
   ]
 }
 
-function createItemResourse() {
+function createItemResource() {
+  alert("entrando no cadastro")
   const inputArrayResult = handleGetInputValue()
+  console.log(inputArrayResult)
   
   let options = {
     scriptPath: path.join(__dirname, './_engine/resources/'),
     args: inputArrayResult
   }
-  try {
-    new PythonShell('ProdutoController.py', options, function (err, results) {
-      if(err) alert("Erro ao tentar criar item, tente novamente")
-      if(results) alert('Item criado com sucesso!')
-    });
 
-  }catch(err) {
-    console.log(err)
-  }
+
+    const result = new PythonShell('ProdutoController.py', options,function (err, results) {
+      // console.log()
+    });
+    console.log(result)
+
+ 
 }
 
-function updateItemResourse() {
+function updateItemResource() {
 
   const inputArrayResult = handleGetInputValue()
 
@@ -82,7 +83,7 @@ function updateItemResourse() {
 }
 
 
-function deleteItemResourse() {
+function deleteItemResource() {
   const idItem =  document.getElementById("input-search").value
 
   const parsedValidation = parseInt(idItem)
@@ -129,7 +130,7 @@ function listItemResource() {
   }  
   try {
     const result  = new PythonShell('ProdutoController.py', options, function (err, results) {
-      console.log()
+      // console.log()
     });
 
     // Retreving
