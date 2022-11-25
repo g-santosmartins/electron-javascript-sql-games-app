@@ -2,16 +2,21 @@
   "name": "locadora-piton",
   "productName": "LocadoraPiton",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Aplicação com funções básicas de armazenamento com foco em uma locadora",
   "main": "main.js",
   "scripts": {
-    "up": "electron ."
+    "up": "electron .",
+    "start": "electron .",
+    "dev": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "",
   "keywords": [
-    "Electron"
+    "Electron",
+    "Python",
+    "Javascript",
+    "MySQL"
   ],
-  "author": "GitHub",
+  "author": "Guilherme Martins, Verônica Gonçalves, William Lopes",
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.0.7",
