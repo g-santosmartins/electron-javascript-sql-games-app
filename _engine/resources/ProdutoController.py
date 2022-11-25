@@ -29,7 +29,7 @@ class ProdutoController:
             result = j.dumps(data)
             return result 
         return j.dumps({'error': True, 'message': "Impossível encontrar o produto"})
-    def atualizar(self,codigo,nome,descricao,preco,qtde,produtora,categoria,previewurl):
+    def atualizar(self,codigo,nome,descricao,preco,qtde,categoria,produtora,previewurl):
         self.prod = self.prodDao.select(codigo)
         if self.prod:
             if(nome):
@@ -50,9 +50,9 @@ class ProdutoController:
                 self.prod.setCategoria(categoria)
             if(previewurl):
                 self.prod.setPreviewurl(previewurl)
-            return self.prodDao.update(self.prod)
-
-        return False
+            self.prodDao.update(self.prod)
+            return j.dumps({'success': True, 'message': "Produto atualizado com sucesso"})
+        return j.dumps({'error': True, 'message': "Impossível encontrar o produto para atualizar"})
     def excluir(self,codigo):
         self.prod = self.prodDao.select(codigo)
         if self.prod:
@@ -76,7 +76,15 @@ if(opType == "2"):
     idSearch       = sys.argv[2]
     print(controllerInstance.consultar(idSearch))
 if(opType == "3"):
-    controllerInstance.cadastrar(name,'descricaoteste',10.00,2,'ateste','pteste','imgurl')
+    name         = sys.argv[2]
+    category     = sys.argv[3]
+    description  = sys.argv[4]
+    quantity     = int(sys.argv[5])
+    producer     = sys.argv[6]
+    price        = float(sys.argv[7])
+    image_url    = sys.argv[8]
+    idSearch    = sys.argv[9]
+    print(controllerInstance.atualizar(idSearch,name,description,price,quantity,category, producer,image_url))
 if(opType == "4"):
     idSearch       = sys.argv[2]
     print(controllerInstance.excluir(idSearch))
