@@ -11,21 +11,20 @@ function handleDefineAction() {
   if (inputType == "4")  { deleteItemResource() }
   return false
 }
-function handleSearchItem() {
-  let inputType = document.getElementById("input-type").value
+function handleSearchItem(type) {
   let inputId = document.getElementById("input-search").value
   if(inputId === ""){
     alert("Insira informação correta na barra de ID!")
     return
   }
-  if (inputType == "1")  { listItemResource() }
-  if (inputType == "2")  { createItemResource() }
-  if (inputType == "3")  { updateItemResource() }
-  if (inputType == "4")  { deleteItemResource() }
+  if (type == "1")  { listItemResource() }
+  if (type == "2")  { createItemResource() }
+  if (type == "3")  { updateItemResource() }
+  if (type == "4")  { deleteItemResource() }
 }
 
 function handleGetInputValue() {
-  let inputType         = document.getElementById("input-type").value
+  // let inputType         = document.getElementById("input-type").value
   let inputName         = document.getElementById("input-name").value
   let inputCategory     = document.getElementById("input-category").value
   let inputDescription  = document.getElementById("input-description").value
@@ -47,9 +46,19 @@ function handleGetInputValue() {
 }
 
 function createItemResource() {
-  alert("entrando no cadastro")
   const inputArrayResult = handleGetInputValue()
   console.log(inputArrayResult)
+
+  let validation = true
+
+  inputArrayResult.map((item, index) => {
+    if(item === "" || item === undefined) validation = false
+  })
+
+  if(!validation) {
+    alert('Houve um erro ao criar registro, revise os campos e tente novamente!')
+    return
+  }
   
   let options = {
     scriptPath: path.join(__dirname, './_engine/resources/'),
@@ -57,11 +66,12 @@ function createItemResource() {
   }
 
 
-    const result = new PythonShell('ProdutoController.py', options,function (err, results) {
-      // console.log()
-    });
-    console.log(result)
-
+  const result = new PythonShell('ProdutoController.py', options,function (err, results) {
+    // console.log()
+  });
+  console.log(result)
+  
+  alert("Cadastro realizado com sucesso")
  
 }
 
@@ -83,7 +93,7 @@ function updateItemResource() {
 }
 
 
-function deleteItemResource() {
+async function deleteItemResource() {
   const idItem =  document.getElementById("input-search").value
 
   const parsedValidation = parseInt(idItem)
@@ -100,8 +110,8 @@ function deleteItemResource() {
   let result = new PythonShell('ProdutoController.py', options);
 
 
-  result.on('message', (message) => {
-
+   result.on('message', (message) => {
+    
     const resultParsed =   JSON.parse(message)
     console.log('resultado', resultParsed)
     if(resultParsed.error) {
@@ -109,7 +119,9 @@ function deleteItemResource() {
       return
     }
     alert(resultParsed.message)
+    cleanAllDataFields()
    })
+
 }
 
 // Getting item
@@ -151,6 +163,7 @@ function listItemResource() {
       document.getElementById("input-maker").value        = resultParsed.producer
       document.getElementById("input-price").value        = resultParsed.price
       document.getElementById("input-image-url").value    = resultParsed.image_url
+      document.getElementById("input-preview-tag").src    = resultParsed.image_url
     })
 
   }catch(err) {
@@ -161,7 +174,7 @@ function listItemResource() {
 function cleanAllDataFields() {
   // getting the UI information
   try {
-    document.getElementById("input-type").value         = "1"
+    // document.getElementById("input-type").value         = "1"
     document.getElementById("input-name").value         = ""
     document.getElementById("input-category").value     = "aventura"
     document.getElementById("input-description").value  = ""
@@ -169,7 +182,9 @@ function cleanAllDataFields() {
     document.getElementById("input-maker").value        = ""
     document.getElementById("input-price").value        = ""
     document.getElementById("input-image-url").value    = ""
-    alert("Os campos foram limpos!")
+      document.getElementById("input-preview-tag").src  = "./_images/no-image.png"
+
+    // alert("Os campos foram limpos!")
   } catch (err) {
     console.log(err)
     alert("Não foi possível limpar campos, tente novamente")

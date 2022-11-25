@@ -17,25 +17,25 @@
   </header>
 
   <section id="sales">
-    <div class="locadora-container">
+    <div class="locadora-container-search">
       <div class="search-container-section">
-        <div class="locadora-form-control-container">
-          <label>Tipo de operação</label>
-          <select required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
-            oninput="setCustomValidity('')" id="input-type">
-            <option value="1">Buscar</option>
-            <option value="2">Cadastrar</option>
-            <option value="3">Atualizar</option>
-            <option value="4">Deletar</option>
-          </select>
-        </div>
         <div class="locadora-form-control-container">
           <label>Identificador do produto</label>
           <input required id="input-search" placeholder="Digite a ID do produto para pesquisar">
         </div>
-        <div class="locadora-form-control-container">
-          <button onclick="handleSearchItem()" style="width: 100%;"
-            class="locadora-card-button-success ">Realizar busca</button>
+        <div class="locadora-form-control-container" style="display: flex; justify-content: space-between;">
+          <button onclick="handleSearchItem('1')" style="width: 20%;"
+            class="locadora-card-button-primary ">Buscar</button>
+
+            <button onclick="handleSearchItem('2')" style="width: 20%"
+            class="locadora-card-button-success ">Cadastrar</button>
+
+            <button onclick="handleSearchItem('3')" style="width: 20%"
+            class="locadora-card-button-warning ">Atualizar</button>
+
+            <button onclick="handleSearchItem('4')" style="width: 20%"
+            class="locadora-card-button-danger">Deletar</button>
+
         </div>
       </div>
     </div>
@@ -49,6 +49,10 @@
       <div class="Toastify"></div>
       <div class="locadora-card">
         <h2 class="locadora-sales-title">Gestão de produtos</h2>
+        <div class="locadora-form-control-container" style="display: flex; justify-content: center;">
+
+        <img style="width: 200px; height: 200px;" id="input-preview-tag" src="./_images/no-image.png" alt="" srcset="">
+          </div>
         <form onsubmit="handleDefineAction();return false;">
           <div class="locadora-form-control-container">
             <div class="id-form-container">
@@ -97,17 +101,7 @@
             <label>Imagem do produto (URL)</label>
             <input required oninvalid="this.setCustomValidity('Por favor preencha o campo')"
               oninput="setCustomValidity('')" id="input-image-url" placeholder="https://exemplolink.com.br/imagem...">
-          </div>
-          <div class="locadora-buttons-container ">
-            <div class="locadora-form-control-container">
-              <button type="submit" class="locadora-card-button-success">
-                Confirmar
-              </button>
             </div>
-            <div class="locadora-form-control-container">
-              <button onclick="cleanAllDataFields()" class="locadora-card-button-danger ">Cancelar</button>
-            </div>
-          </div>
         </form>
       </div>
     </div>

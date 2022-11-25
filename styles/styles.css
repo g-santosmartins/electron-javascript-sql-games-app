@@ -33,7 +33,16 @@ a:visited {
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
-  background-color: #404b61;
+  background: linear-gradient(180deg, #102347 0%, #181818 100%);
+  padding: 40px 40px;
+  border-radius: 5px;
+}
+
+.locadora-container-search {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(180deg, #102347 0%, #181818 100%);
   padding: 40px 40px;
   border-radius: 5px;
 }
@@ -143,6 +152,41 @@ header {
   color: #9aaabe;
   padding: 0 20px;
   font-size: 18px;
+}
+
+.locadora-card-button-primary {
+  border: none;
+  background-color: #273ec3;
+  height: 50px;
+  color: #f1f1f1;
+  font-size: 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  min-width: auto;
+  width: 400px
+}
+
+.locadora-card-button-primary:hover{
+  background-color: #334de6;
+  transition: 0.5s;
+}
+
+
+.locadora-card-button-warning {
+  border: none;
+  background-color: #bcad21;
+  height: 50px;
+  color: #f1f1f1;
+  font-size: 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  min-width: auto;
+  width: 400px
+}
+
+.locadora-card-button-warning:hover{
+  background-color: #dcca30;
+  transition: 0.5s;
 }
 
 .locadora-card-button-success {
